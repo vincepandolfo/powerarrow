@@ -48,61 +48,6 @@ editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 browser = "firefox"
 modkey = "Mod4"
-iptraf = "urxvt -t 'ip monitoring' -g 180x54-20+34 -e sudo iptraf-ng -i all"
--- {{{      <10-minute wallpaper scroller/>      }}} --
-
---bg_index = 1
---bg_timeout = 10
---bg_path = "/home/ep/.config/awesome/wallpapers/"
----- bg_path is a collection of wallpapers
----- collection is ordered from 0, 1, 2, 3, 4, 5, 6.....  n
---bg_files = { "blackhardwood.jpg", "bluespace.jpg", "brightearth.jpg", "brokenwindmill.jpg", "circlewater.jpg", "darkearth.jpg", "spacemountains.jpg" }
---
----- setup the timer
---bg_timer = timer { timeout = bg_timeout }
---bg_timer:connect_signal("timeout", function()
---
---        --sets wallpaper to current index
---        gears.wallpaper.maximized( bg_path .. bg_files[bg_index] , s, true)
---
---        --stop the timer
---        bg_timer:stop()
---
---        -- get index based on time
---        b = tonumber(os.date("%M"))
---        if b <= 00 and  b < 10 then
---                --gears.wallpaper.maximized( bg_path .. bg_files[7] , s, true)
---                bg_index = 1
---        elseif b <= 10 and b < 20 then
---                --gears.wallpaper.maximized( bg_path .. bg_files[1] , s, true)
---                bg_index = 1
---        elseif b <= 20 and b < 30 then
---                --gears.wallpaper.maximized( bg_path .. bg_files[2] , s, true)
---                bg_index = 2
---        elseif b <= 30 and b < 40 then
---                --gears.wallpaper.maximized( bg_path .. bg_files[3] , s, true)
---                bg_index = 3
---        elseif b <= 40 and b < 50 then
---                --gears.wallpaper.maximized( bg_path .. bg_files[4] , s, true)
---                bg_index = 4
---        elseif b <= 50 and b <= 59 then
---                --gears.wallpaper.maximized( bg_path .. bg_files[5] , s, true)
---                bg_index = 5
---        end
---
---        --restart the timer
---        bg_timer.timeout = bg_timeout
---        bg_timer:start()
---end)
---
---        --initial timer when rc.lua is first run
---        bg_timer:start()
-
-
----- {{{ Variable definitions
----- Themes define colours, icons, and wallpapers
---beautiful.init("/usr/share/awesome/themes/zenburn-custom/theme.lua")
-
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 local layouts =
@@ -301,8 +246,9 @@ vicious.register(cpuwidget, vicious.widgets.cpu,
 '<span background="#4B696D" font="Terminus 12"> <span font="Terminus 9" color="#DDDDDD">$2% <span color="#888888">·</span> $3% </span></span>', 3)
 cpuicon = wibox.widget.imagebox()
 cpuicon:set_image(beautiful.widget_cpu)
---sensors = wibox.widget.textbox()
---vicious.register(sensors, vicious.widgets.sensors)
+sensors = wibox.widget.textbox()
+--vicious.register(sensors, vicious.widgets.sensors,
+--'<span background="#4B696D" font="Terminus 12"> <span font="Terminus 9" color="#DDDDDD">$1 </span> ', 1)
 tempicon = wibox.widget.imagebox()
 tempicon:set_image(beautiful.widget_temp)
 blingbling.popups.htop(cpuwidget,
@@ -395,6 +341,9 @@ for s = 1, screen.count() do
     right_layout:add(volume_widget)
 
     right_layout:add(mytextclock)
+    right_layout:add(cpuicon)
+    right_layout:add(cpuwidget)
+    right_layout:add(arr6)
     right_layout:add(tempicon)
     right_layout:add(arr5)
     right_layout:add(udisks_glue)

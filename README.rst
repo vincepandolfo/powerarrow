@@ -30,6 +30,8 @@ What works in my version: so far
 - The binary clock
 - battery
 - CPU widget
+- MEM widget
+- Mutt Mail widget
 
 Screenshots
 ----------

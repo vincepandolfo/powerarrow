@@ -42,13 +42,14 @@ config_dir = ("/home/ep/.config/awesome/")
 themes_dir = (config_dir .. "/themes")
 beautiful.init(themes_dir .. "/powerarrow/theme.lua")
 awesome.font = "TerminusMedium 12"
+
 --{{---| Variables |------------------------
 terminal = "urxvt"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 browser = "firefox"
 modkey = "Mod4"
-
+mailmutt = "urxvt -T 'Mutt' -g 90x25-20+34 -e mutt"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 local layouts =
 {
@@ -230,6 +231,19 @@ mytasklist.buttons = awful.util.table.join(
 -- Create a textclock widget
 mytextclock = awful.widget.textclock(" %a %b %d, %I:%M %p ")
 
+
+--{{--| Mail widget |---------
+mailicon = wibox.widget.imagebox()
+mailicon:set_image(beautiful.widget_mail)
+mailicon:buttons(awful.util.table.join(awful.button({ }, 1,
+function () awful.util.spawn_with_shell(mailmutt) end)))
+--{{--| MEM widget |-----------------
+memwidget = wibox.widget.textbox()
+vicious.register(memwidget, vicious.widgets.mem, '<span background="#777E76" font="Terminus 12"> <span font="Terminus 9" color="#EEEEEE" background="#777E76">$2MB </span></span>', 13)
+memicon = wibox.widget.imagebox()
+memicon:set_image(beautiful.widget_mem)
+
+
 --{{---| Net widget | ----------------
 netwidget = wibox.widget.textbox()
 vicious.register(netwidget,
@@ -247,8 +261,7 @@ vicious.register(cpuwidget, vicious.widgets.cpu,
 cpuicon = wibox.widget.imagebox()
 cpuicon:set_image(beautiful.widget_cpu)
 sensors = wibox.widget.textbox()
---vicious.register(sensors, vicious.widgets.sensors,
---'<span background="#4B696D" font="Terminus 12"> <span font="Terminus 9" color="#DDDDDD">$1 </span> ', 1)
+--vicious.register(sensors, vicious.widgets.sensors, "$1%", 1)
 tempicon = wibox.widget.imagebox()
 tempicon:set_image(beautiful.widget_temp)
 blingbling.popups.htop(cpuwidget,
@@ -341,6 +354,13 @@ for s = 1, screen.count() do
     right_layout:add(volume_widget)
 
     right_layout:add(mytextclock)
+    right_layout:add(spr)
+    right_layout:add(arr9)
+    right_layout:add(mailicon)
+    right_layout:add(arr8)
+    right_layout:add(memicon)
+    right_layout:add(memwidget)
+    right_layout:add(arr7)
     right_layout:add(cpuicon)
     right_layout:add(cpuwidget)
     right_layout:add(arr6)

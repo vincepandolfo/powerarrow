@@ -29,7 +29,7 @@ What works in my version: so far
 - The layout in general (powerline)
 - The binary clock
 - battery
-
+- CPU widget
 
 Screenshots
 ----------

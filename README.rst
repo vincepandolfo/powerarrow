@@ -22,6 +22,8 @@ https://aur.archlinux.org/packages/lua-oocairo/
 udisks-glue-git:
 https://github.com/fernandotcl/udisks-glue
 
+**Beware, some of the hotkeys/key-bindings are from my rc.lua, so if something that you are used to pressing doesn't work, check my global keys**
+
 
 What works in my version: so far
 ------------------------

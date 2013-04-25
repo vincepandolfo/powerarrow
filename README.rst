@@ -4,8 +4,8 @@ Awesome Powerarrow theme for 3.5
 :Original Author: https://github.com/romockee/powerarrow
 
 This is my fork of Romockee's Powerarrow theme, implemented
-for Awesome-WM 3.5  This project is still in a stage where
-40% of the widgets work and I am still working on fixing up
+for Awesome-WM 3.5  This project is now in a stage where
+80% of the widgets work and I am still working on fixing up
 the libraries.
 
 

@@ -44,8 +44,9 @@ Some differences:
 library to indicate what process are currently using the
 Internet
 - Volume icon instead of the core temperature.
+
 Screenshots:
-----------
+-------------
 
 .. image:: http://i.imgur.com/zWUKauq.jpg
 .. image:: http://i.imgur.com/YrxaVyl.jpg

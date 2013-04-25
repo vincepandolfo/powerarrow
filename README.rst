@@ -40,9 +40,7 @@ Some differences:
 
 - Took out the binary clock, due to the fact that it takes me way to long to read.
 - Added on a clock widget and icon
-- Added a "netstat" drop down menu using the 'blingbling'
-library to indicate what process are currently using the
-Internet
+- Added a "netstat" drop down menu using the 'blingbling' library to indicate what processes are currently using the Internet
 - Volume icon instead of the core temperature.
 
 Screenshots:

@@ -99,7 +99,7 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
                                   }
                         })
 
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
+mylauncher = awful.widget.launcher({ --image = beautiful.awesome_icon,
                                      menu = mymainmenu })
 
 -- Menubar configuration
@@ -109,7 +109,7 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 
 -- {{{ Wibox
 -- Create a textclock widget
-mytextclock = awful.widget.textclock(" %a %b %d, %I:%M %p ")
+--mytextclock = awful.widget.textclock(" %a %b %d, %I:%M %p ")
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -160,133 +160,83 @@ mytasklist.buttons = awful.util.table.join(
                                           end))
 
 
---{{---| Binary Clock |-------
- local binClock = wibox.widget.base.make_widget()
- binClock.radius = 1.5
- binClock.shift = 1.8
- binClock.farShift = 2
- binClock.border = 1
- binClock.lineWidth = 1
- binClock.colorActive = beautiful.binclock_fga
-
- binClock.fit = function(binClock, width, height)
- 	local size = math.min(width, height)
- 	return 6 * 2 * binClock.radius + 5 * binClock.shift + 2 * binClock.farShift + 2 * binClock.border + 2 * binClock.border, size
- end
-
- binClock.draw = function(binClock, wibox, cr, width, height)
- 	local curTime = os.date("*t")
-
- 	local column = {}
- 	table.insert(column, string.format("%04d", binClock:dec_bin(string.sub(string.format("%02d", curTime.hour), 1, 1))))
- 	table.insert(column, string.format("%04d", binClock:dec_bin(string.sub(string.format("%02d", curTime.hour), 2, 2))))
- 	table.insert(column, string.format("%04d", binClock:dec_bin(string.sub(string.format("%02d", curTime.min), 1, 1))))
- 	table.insert(column, string.format("%04d", binClock:dec_bin(string.sub(string.format("%02d", curTime.min), 2, 2))))
- 	table.insert(column, string.format("%04d", binClock:dec_bin(string.sub(string.format("%02d", curTime.sec), 1, 1))))
- 	table.insert(column, string.format("%04d", binClock:dec_bin(string.sub(string.format("%02d", curTime.sec), 2, 2))))
-
- 	local bigColumn = 0
- 	for i = 0, 5 do
- 		if math.floor(i / 2) > bigColumn then
- 			bigColumn = bigColumn + 1
- 		end
- 		for j = 0, 3 do
- 			if string.sub(column[i + 1], j + 1, j + 1) == "0" then
- 				active = false
- 			else
- 				active = true
- 			end
- 			binClock:draw_point(cr, bigColumn, i, j, active)
- 		end
- 	end
- end
-
- binClock.dec_bin = function(binClock, inNum)
- 	inNum = tonumber(inNum)
- 	local base, enum, outNum, rem = 2, "01", "", 0
- 	while inNum > (base - 1) do
- 		inNum, rem = math.floor(inNum / base), math.fmod(inNum, base)
- 		outNum = string.sub(enum, rem + 1, rem + 1) .. outNum
- 	end
- 	outNum = inNum .. outNum
- 	return outNum
- end
-
- binClock.draw_point = function(binClock, cr, bigColumn, column, row, active)
- 	cr:arc(binClock.border + column * (2 * binClock.radius + binClock.shift) + bigColumn * binClock.farShift + binClock.radius,
- 		 binClock.border + row * (2 * binClock.radius + binClock.shift) + binClock.radius, 2, 0, 2 * math.pi)
- 	if active then
- 		--cr:set_source_rgba(0, 0.5, 0, 1)
- 		cr:set_source_rgba(204, 204, 204, 1)
- 	else
- 		cr:set_source_rgba(0.5, 0.5, 0.5, 1)
- 	end
- 	cr:fill()
- end
-
- binClocktimer = timer { timeout = 1 }
- binClocktimer:connect_signal("timeout", function() binClock:emit_signal("widget::updated") end)
- binClocktimer:start()
-
--- Create a textclock widget
-mytextclock = awful.widget.textclock(" %a %b %d, %I:%M %p ")
-
-
 --{{--| Mail widget |---------
 mailicon = wibox.widget.imagebox()
 mailicon:set_image(beautiful.widget_mail)
 mailicon:buttons(awful.util.table.join(awful.button({ }, 1,
 function () awful.util.spawn_with_shell(mailmutt) end)))
+
 --{{--| MEM widget |-----------------
 memwidget = wibox.widget.textbox()
-vicious.register(memwidget, vicious.widgets.mem, '<span background="#777E76" font="Terminus 12"> <span font="Terminus 9" color="#EEEEEE" background="#777E76">$2MB </span></span>', 13)
+vicious.register(memwidget, vicious.widgets.mem, '<span background="#777E76" font="UbuntuMono 12"> <span font="UbuntuMono 12" color="#EEEEEE" background="#777E76">$2MB </span></span>', 13)
 memicon = wibox.widget.imagebox()
 memicon:set_image(beautiful.widget_mem)
 
-
---{{---| Net widget | ----------------
+--{{--| Time and Date widget |-------
+tdwidget = wibox.widget.textbox()
+vicious.register(tdwidget, vicious.widgets.date, '<span font="UbuntuMono 12" color="#EEEEEE" background="#777E76"> %b %d %I:%M</span>', 20)
+clockicon = wibox.widget.imagebox()
+clockicon:set_image(beautiful.widget_clock)
+----{{---| Net widget | ----------------
 netwidget = wibox.widget.textbox()
-vicious.register(netwidget,
-vicious.widgets.net,
-'<span background="#C2C2A4" font="UbuntuMono 12"> <span font="UbuntuMono 12" color="#FFFFFF">"%a"</span> </span>', 3)
+vicious.register(netwidget, vicious.widgets.wifi, '<span background="#C2C2A4" font="Terminus 12"> <span font="Terminus 9" color="#FFFFFF">${ssid}</span> </span>', 11, 'wlp2s0')
+
+blingbling.popups.netstat(netwidget,
+{ title_color = beautiful.notify_font_color_1,
+established_color = beautiful.notify_font_color_3, listen_color = beautiful.notify_font_color_2})
+
+my_net=blingbling.net.new()
+my_net:set_height(18)
+my_net:set_ippopup()
+my_net:set_show_text(true)
+my_net:set_v_margin(3)
+
+--vicious.register(netwidget, vicious.widgets.wifi, function(widget,args) return args['{ssid}'] end, 11, 'wlp2s0')
+
+--vicious.register(netwidget, vicious.widgets.net, function(widget, args)
+--    local display = ""
+--      if args["{wlp2s0 carrier}"] == 1 then
+--          interface = "wlp2s0"
+--          display = args["{"..interface.." down_kb}"]..'k'..args["{"..interface.." rx_mb}"].."M </span>"
+--      elseif args["{enp0s25 carrier}"] == 1 then
+--          interface = "enp0s25"
+--          display = args["{"..interface.."down_kb}"]..'k '..args["{"..interface.." rx_mb}"].."M </span>"
+--      end
+--      return "<span><span>"..display.."<span><span>"
+--  end, 11, 'wlp2s0')
+--netwidget = wibox.widget.textbox()
+--netwidget:set_image(beautiful.widget_net)
+--netwidget:buttons( awful.util.table.join(awful.button({ }, 1, function() exec('wicd-gtk') end)))
+
+
 neticon = wibox.widget.imagebox()
-neticon:set_image(widget_net)
-netwidget:buttons(awful.util.table.join(awful.button({}, 1,
-function () awful.util.spawn_with_shell(iptraf) end)))
+neticon:set_image(beautiful.widget_net)
 
 --{{---| CPU / sensors widget |-----------
 cpuwidget = wibox.widget.textbox()
 vicious.register(cpuwidget, vicious.widgets.cpu,
-'<span background="#4B696D" font="Terminus 12"> <span font="Terminus 9" color="#DDDDDD">$2% <span color="#888888">·</span> $3% </span></span>', 3)
+'<span background="#4B696D" font="UbuntuMono 12"> <span font="UbuntuMono 12" color="#DDDDDD">$2%<span color="#888888">·</span>$3%</span></span>', 3)
 cpuicon = wibox.widget.imagebox()
 cpuicon:set_image(beautiful.widget_cpu)
-sensors = wibox.widget.textbox()
---vicious.register(sensors, vicious.widgets.sensors, "$1%", 1)
-tempicon = wibox.widget.imagebox()
-tempicon:set_image(beautiful.widget_temp)
 blingbling.popups.htop(cpuwidget,
 { title_color = beautiful.notify_font_color_1,
 user_color = beautiful.notify_font_color_2,
-root_color = beautiful.notify_font_color_3,
-terminal = "terminal --geometry=130x56-10+26"})
+root_color = beautiful.notify_font_color_3})
 
 
+----{{--| Volume / volume icon |----------
+volume = wibox.widget.textbox()
+vicious.register(volume, vicious.widgets.volume,
+'<span background="#4B3B51" font="UbuntuMono 12"><span font="UbuntuMono 11" color="#EEEEEE"> Vol:$1$2 </span></span>', 0.3, "Master")
 
---{{---| FS's widget / udisks-glue menu |-----
+--{{---| File Size widget |-----
 fswidget = wibox.widget.textbox()
 vicious.register(fswidget, vicious.widgets.fs,
-'<span background="#D0785D" font="Terminus 12"> <span font="Terminus 9" color="#EEEEEE">test </span></span>', 8)
---udisks_glue = blingbling.udisks_glue.new(beautiful.widget_hdd)
-udisks_glue=blingbling.udisks_glue.new({ menu_icon = themes_dir .. "/test/titlebar/maximized_focus_active.png"})
-udisks_glue:set_mount_icon(beautiful.accept)
-udisks_glue:set_umount_icon(beautiful.cancel)
-udisks_glue:set_detach_icon(beautiful.cancel)
-udisks_glue:set_Usb_icon(beautiful.usb)
-udisks_glue:set_Cdrom_icon(beautiful.cdrom)
---awful.widget.layout.margins[udisks_glue.widget] = { top = 0}
---udisks_glue.widget.resize = false
+'<span background="#D0785D" font="Terminus 12"> <span font="Terminus 10" color="#EEEEEE">${/home used_p}/${/home avail_p} GB </span></span>', 8)
+fsicon = wibox.widget.imagebox()
+fsicon:set_image(beautiful.widget_hdd)
 
---{{---| Battery widget |---------------
+----{{---| Battery widget |---------------
 baticon = wibox.widget.imagebox()
 baticon:set_image(beautiful.widget_battery)
 batwidget = wibox.widget.textbox()
@@ -349,11 +299,8 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
-    --adds the volume between the network and before the TIME
-    --right_layout:add(alsawidget.bar)
-    right_layout:add(volume_widget)
+    --right_layout:add(volume_widget)
 
-    right_layout:add(mytextclock)
     right_layout:add(spr)
     right_layout:add(arr9)
     right_layout:add(mailicon)
@@ -364,18 +311,20 @@ for s = 1, screen.count() do
     right_layout:add(cpuicon)
     right_layout:add(cpuwidget)
     right_layout:add(arr6)
-    right_layout:add(tempicon)
+    right_layout:add(volume)
     right_layout:add(arr5)
-    right_layout:add(udisks_glue)
+    right_layout:add(fsicon)
     right_layout:add(fswidget)
     right_layout:add(arr4)
     right_layout:add(baticon)
     right_layout:add(batwidget)
     right_layout:add(arr3)
+    right_layout:add(neticon)
     right_layout:add(netwidget)
     right_layout:add(arr2)
     right_layout:add(spr3f)
-    right_layout:add(binClock)
+    right_layout:add(clockicon)
+    right_layout:add(tdwidget)
     right_layout:add(spr3f)
     right_layout:add(arr1)
     right_layout:add(mylayoutbox[s])

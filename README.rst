@@ -27,15 +27,25 @@ What works in my version: so far
 ------------------------
 
 - The layout in general (powerline)
-- The binary clock
-- battery
+~~- The binary clock~~ I used a normal text Date and Time
+now due to the fact that I am slow at reading the binary clock.
+- Wireless icon and SSID name widget
+- Battery
+- Volume
 - CPU widget
 - MEM widget
 - Mutt Mail widget
 
-Screenshots
+Some differences:
+----------------
+
+- Added on a clock widget and icon
+- Added a "netstat" drop down menu using the 'blingbling'
+library to indicate what process are currently using the
+Internet
+- Volume icon instead of the core temperature.
+Screenshots:
 ----------
 
-
-.. image:: http://i.imgur.com/xYLPgHj.jpg
-
+.. image:: http://i.imgur.com/zWUKauq.jpg
+.. image:: http://i.imgur.com/YrxaVyl.jpg

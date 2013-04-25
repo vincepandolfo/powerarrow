@@ -27,7 +27,7 @@ What works in my version: so far
 ------------------------
 
 - The layout in general (powerline)
-~~- The binary clock~~ I used a normal text Date and Time
+~~The binary clock~~ I used a normal text Date and Time
 now due to the fact that I am slow at reading the binary clock.
 - Wireless icon and SSID name widget
 - Battery

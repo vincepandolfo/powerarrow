@@ -27,8 +27,7 @@ What works in my version: so far
 ------------------------
 
 - The layout in general (powerline)
-~~The binary clock~~ I used a normal text Date and Time
-now due to the fact that I am slow at reading the binary clock.
+- Clock
 - Wireless icon and SSID name widget
 - Battery
 - Volume
@@ -39,6 +38,7 @@ now due to the fact that I am slow at reading the binary clock.
 Some differences:
 ----------------
 
+- Took out the binary clock, due to the fact that it takes me way to long to read.
 - Added on a clock widget and icon
 - Added a "netstat" drop down menu using the 'blingbling'
 library to indicate what process are currently using the

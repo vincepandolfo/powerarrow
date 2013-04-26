@@ -4,8 +4,8 @@ Awesome Powerarrow theme for 3.5
 :Original Author: https://github.com/romockee/powerarrow
 
 This is my fork of Romockee's Powerarrow theme, implemented
-for Awesome-WM 3.5  This project is still in a stage where
-40% of the widgets work and I am still working on fixing up
+for Awesome-WM 3.5  This project is now in a stage where
+80% of the widgets work and I am still working on fixing up
 the libraries.
 
 
@@ -22,13 +22,14 @@ https://aur.archlinux.org/packages/lua-oocairo/
 udisks-glue-git:
 https://github.com/fernandotcl/udisks-glue
 
+**Beware, some of the hotkeys/key-bindings are from my rc.lua, so if something that you are used to pressing doesn't work, check my global keys**
+
 
 What works in my version: so far
 ------------------------
 
 - The layout in general (powerline)
-~~- The binary clock~~ I used a normal text Date and Time
-now due to the fact that I am slow at reading the binary clock.
+- Clock
 - Wireless icon and SSID name widget
 - Battery
 - Volume
@@ -39,13 +40,14 @@ now due to the fact that I am slow at reading the binary clock.
 Some differences:
 ----------------
 
+- Took out the binary clock, due to the fact that it takes me way to long to read.
 - Added on a clock widget and icon
-- Added a "netstat" drop down menu using the 'blingbling'
-library to indicate what process are currently using the
-Internet
+- Added a "netstat" drop down menu using the 'blingbling' library to indicate what processes are currently using the Internet
 - Volume icon instead of the core temperature.
+
 Screenshots:
-----------
+-------------
 
 .. image:: http://i.imgur.com/zWUKauq.jpg
 .. image:: http://i.imgur.com/YrxaVyl.jpg
+

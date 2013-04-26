@@ -44,7 +44,8 @@ beautiful.init(themes_dir .. "/powerarrow/theme.lua")
 awesome.font = "TerminusMedium 12"
 
 --{{---| Variables |------------------------
-terminal = "urxvt"
+terminal = "urxvt -geometry 79x22+0-0"
+--terminal = "urxvt"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 browser = "firefox"
@@ -58,13 +59,6 @@ local layouts =
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.top,
-    awful.layout.suit.fair,
-    awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral,
-    awful.layout.suit.spiral.dwindle,
-    awful.layout.suit.max,
-    awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier
 }
 -- }}}
 
@@ -177,40 +171,37 @@ tdwidget = wibox.widget.textbox()
 vicious.register(tdwidget, vicious.widgets.date, '<span font="UbuntuMono 12" color="#EEEEEE" background="#777E76"> %b %d %I:%M</span>', 20)
 clockicon = wibox.widget.imagebox()
 clockicon:set_image(beautiful.widget_clock)
+
 ----{{---| Net widget | ----------------
 netwidget = wibox.widget.textbox()
-vicious.register(netwidget, vicious.widgets.wifi, '<span background="#C2C2A4" font="Terminus 12"> <span font="Terminus 9" color="#FFFFFF">${ssid}</span> </span>', 11, 'wlp2s0')
+--vicious.register(netwidget, vicious.widgets.wifi, '<span background="#C2C2A4" font="Terminus 12"> <span font="Terminus 9" color="#FFFFFF">${ssid}</span> </span>', 11, 'wlp2s0')
 
-blingbling.popups.netstat(netwidget,
-{ title_color = beautiful.notify_font_color_1,
-established_color = beautiful.notify_font_color_3, listen_color = beautiful.notify_font_color_2})
-
-my_net=blingbling.net.new()
-my_net:set_height(18)
-my_net:set_ippopup()
-my_net:set_show_text(true)
-my_net:set_v_margin(3)
-
---vicious.register(netwidget, vicious.widgets.wifi, function(widget,args) return args['{ssid}'] end, 11, 'wlp2s0')
-
---vicious.register(netwidget, vicious.widgets.net, function(widget, args)
---    local display = ""
---      if args["{wlp2s0 carrier}"] == 1 then
---          interface = "wlp2s0"
---          display = args["{"..interface.." down_kb}"]..'k'..args["{"..interface.." rx_mb}"].."M </span>"
---      elseif args["{enp0s25 carrier}"] == 1 then
---          interface = "enp0s25"
---          display = args["{"..interface.."down_kb}"]..'k '..args["{"..interface.." rx_mb}"].."M </span>"
---      end
---      return "<span><span>"..display.."<span><span>"
---  end, 11, 'wlp2s0')
---netwidget = wibox.widget.textbox()
---netwidget:set_image(beautiful.widget_net)
---netwidget:buttons( awful.util.table.join(awful.button({ }, 1, function() exec('wicd-gtk') end)))
-
-
+vicious.register(netwidget, vicious.widgets.net, function(widget, args)
+    local interface = ""
+    if args["{wlp2s0 carrier}"] == 1 then
+        interface = "wlp2s0"
+    elseif args["{enp0s25 carrier}"] == 1 then
+        interface = "enp0s25"
+    else
+        return ""
+    end
+    return args["{"..interface.." down_kb}"]..'k/'..args["{"..interface.." rx_mb}"].."M" end, 11)
 neticon = wibox.widget.imagebox()
 neticon:set_image(beautiful.widget_net)
+neticon:buttons(awful.util.table.join(
+awful.button({ }, 1, function() awful.util.spawn_with_shell('wicd-client -n') end)))
+--{{--| Uncomment the section below if you want a 'blingbling'
+--style drop down menu for a netstat display |----
+
+--blingbling.popups.netstat(netwidget,
+--{ title_color = beautiful.notify_font_color_1,
+--established_color = beautiful.notify_font_color_3, listen_color = beautiful.notify_font_color_2})
+--
+--my_net=blingbling.net.new()
+--my_net:set_height(18)
+--my_net:set_ippopup()
+--my_net:set_show_text(true)
+--my_net:set_v_margin(3)
 
 --{{---| CPU / sensors widget |-----------
 cpuwidget = wibox.widget.textbox()
@@ -269,7 +260,7 @@ arr9 = wibox.widget.imagebox()
 arr9:set_image(beautiful.arr9)
 arr0 = wibox.widget.imagebox()
 arr0:set_image(beautiful.arr0)
-
+---------------------------------------
 for s = 1, screen.count() do
     -- Create a promptbox for each screen
     mypromptbox[s] = awful.widget.prompt()
@@ -299,7 +290,6 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
-    --right_layout:add(volume_widget)
 
     right_layout:add(spr)
     right_layout:add(arr9)
@@ -419,7 +409,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end),
     awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end),
 
-    --awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
+    awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
     awful.key({ modkey,           }, "Tab",
         function ()
             awful.client.focus.history.previous()
@@ -541,8 +531,8 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { class = "gimp" },
       properties = { floating = true } },
-    { rule = { class = "urxvt" },
-      properties = { size_hints_honor = false } },
+    --{ rule = { class = "urxvt" },
+    --  properties = { size_hints_honor = false } },
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { tag = tags[1][2] } },
@@ -623,7 +613,8 @@ function run_once(cmd)
 end
 
 -- ensures that the network applet on the menu shows up once.
-run_once("wicd-client -t")
+--run_once("wicd-client -t")
+--run_once("wicd-client -n")
 awful.util.spawn_with_shell("redshift -l 49.26:-123.23")
 
 -- turns off caps lock keys and makes it function like an escape

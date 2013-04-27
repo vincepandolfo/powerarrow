@@ -52,9 +52,9 @@ Screenshots:
 -------------
 
 .. image:: http://i.imgur.com/oqBm8Qf.png
-wifi signal low
+- wifi signal low
 .. image:: http://i.imgur.com/nb0dBOx.png
-wifi signal medium
+- wifi signal medium
 
-..image:: http://i.imgur.com/9WWpTXL.jpg
-The desktop so far
+.. image:: http://i.imgur.com/9WWpTXL.jpg
+- The desktop so far

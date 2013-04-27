@@ -6,4 +6,10 @@ April 26th 2013
 widget (thanks danielfgray)
 - reduced clutter by merging the volume systray icon into the
 powerarrow space
-- removed the run_once from rc.lua.
+- removed the run_once(wicd-client)  from rc.lua.
+
+April 27th 2013
+---------------
+- Working signal strength indicator, which is dependent on
+wifi signal. (please see screenshots)
+- Added up/down-load speed, and data received indicator

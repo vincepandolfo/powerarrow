@@ -44,13 +44,14 @@ beautiful.init(themes_dir .. "/powerarrow/theme.lua")
 awesome.font = "TerminusMedium 12"
 
 --{{---| Variables |------------------------
-terminal = "urxvt -geometry 79x22+0-0"
---terminal = "urxvt"
+--terminal = "urxvt -geometry 79x22+0-0"
+terminal = "urxvt"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 browser = "firefox"
 modkey = "Mod4"
 mailmutt = "urxvt -T 'Mutt' -g 90x25-20+34 -e mutt"
+cal = "urxvt -T 'Cal' -e cal"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 local layouts =
 {
@@ -172,9 +173,22 @@ vicious.register(tdwidget, vicious.widgets.date, '<span font="UbuntuMono 12" col
 clockicon = wibox.widget.imagebox()
 clockicon:set_image(beautiful.widget_clock)
 
+
+---{{---| Wifi Signal Widget |-------
+neticon = wibox.widget.imagebox()
+vicious.register(neticon, vicious.widgets.wifi, function(widget, args)
+    local sigstrength = tonumber(args["{link}"])
+    if sigstrength > 69 then
+        neticon:set_image(beautiful.widget_nethigh)
+    elseif sigstrength > 40 and sigstrength < 70 then
+        neticon:set_image(beautiful.widget_netmedium)
+    else
+        neticon:set_image(beautiful.widget_netlow)
+    end
+end, 110, 'wlp2s0')
+
 ----{{---| Net widget | ----------------
 netwidget = wibox.widget.textbox()
---vicious.register(netwidget, vicious.widgets.wifi, '<span background="#C2C2A4" font="Terminus 12"> <span font="Terminus 9" color="#FFFFFF">${ssid}</span> </span>', 11, 'wlp2s0')
 
 vicious.register(netwidget, vicious.widgets.net, function(widget, args)
     local interface = ""
@@ -185,11 +199,11 @@ vicious.register(netwidget, vicious.widgets.net, function(widget, args)
     else
         return ""
     end
-    return args["{"..interface.." down_kb}"]..'k/'..args["{"..interface.." rx_mb}"].."M" end, 11)
-neticon = wibox.widget.imagebox()
-neticon:set_image(beautiful.widget_net)
-neticon:buttons(awful.util.table.join(
+    return '<span background="#C2C2A4" font="UbuntuMono 12"> <span font ="UbuntuMono 12" color="#FFFFFF">'..args["{"..interface.." down_kb}"]..'kbps|'..args["{"..interface.." rx_mb}"].."Mb "..'</span></span>' end, 11)
+netwidget:buttons(awful.util.table.join(
 awful.button({ }, 1, function() awful.util.spawn_with_shell('wicd-client -n') end)))
+
+
 --{{--| Uncomment the section below if you want a 'blingbling'
 --style drop down menu for a netstat display |----
 
@@ -209,21 +223,25 @@ vicious.register(cpuwidget, vicious.widgets.cpu,
 '<span background="#4B696D" font="UbuntuMono 12"> <span font="UbuntuMono 12" color="#DDDDDD">$2%<span color="#888888">·</span>$3%</span></span>', 3)
 cpuicon = wibox.widget.imagebox()
 cpuicon:set_image(beautiful.widget_cpu)
-blingbling.popups.htop(cpuwidget,
-{ title_color = beautiful.notify_font_color_1,
-user_color = beautiful.notify_font_color_2,
-root_color = beautiful.notify_font_color_3})
+--
+--{{--| Uncomment the section below if you want a 'blingbling'
+--style drop down menu for a htop display |---
+--
+--blingbling.popups.htop(cpuwidget,
+--{ title_color = beautiful.notify_font_color_1,
+--user_color = beautiful.notify_font_color_2,
+--root_color = beautiful.notify_font_color_3})
 
 
 ----{{--| Volume / volume icon |----------
 volume = wibox.widget.textbox()
 vicious.register(volume, vicious.widgets.volume,
-'<span background="#4B3B51" font="UbuntuMono 12"><span font="UbuntuMono 11" color="#EEEEEE"> Vol:$1$2 </span></span>', 0.3, "Master")
+'<span background="#4B3B51" font="UbuntuMono 12"><span font="UbuntuMono 12" color="#EEEEEE"> Vol:$1$2 </span></span>', 0.3, "Master")
 
 --{{---| File Size widget |-----
 fswidget = wibox.widget.textbox()
 vicious.register(fswidget, vicious.widgets.fs,
-'<span background="#D0785D" font="Terminus 12"> <span font="Terminus 10" color="#EEEEEE">${/home used_p}/${/home avail_p} GB </span></span>', 8)
+'<span background="#D0785D" font="UbuntuMono 12"> <span font="UbuntuMono 12" color="#EEEEEE">${/home used_p}/${/home avail_p} GB </span></span>', 8)
 fsicon = wibox.widget.imagebox()
 fsicon:set_image(beautiful.widget_hdd)
 
@@ -237,9 +255,9 @@ vicious.register( batwidget, vicious.widgets.bat, '<span background="#92B0A0" fo
 spr = wibox.widget.textbox()
 spr:set_text(' ')
 sprd = wibox.widget.textbox()
-sprd:set_markup('<span background ="#313131" font="TerminusMedium 12"> </span>')
+sprd:set_markup('<span background ="#313131" font="UbuntuMono 12"> </span>')
 spr3f = wibox.widget.textbox()
-spr3f:set_markup('<span background="#777e76" font="TerminusMedium 12"> </span>')
+spr3f:set_markup('<span background="#777e76" font="UbuntuMono 12"> </span>')
 arr1 = wibox.widget.imagebox()
 arr1:set_image("/home/ep/.config/awesome/themes/powerarrow/icons/powerarrow/arr1.png")
 arr2 = wibox.widget.imagebox()
@@ -261,6 +279,7 @@ arr9:set_image(beautiful.arr9)
 arr0 = wibox.widget.imagebox()
 arr0:set_image(beautiful.arr0)
 ---------------------------------------
+
 for s = 1, screen.count() do
     -- Create a promptbox for each screen
     mypromptbox[s] = awful.widget.prompt()
@@ -290,7 +309,7 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
-
+    -- Powerarrow
     right_layout:add(spr)
     right_layout:add(arr9)
     right_layout:add(mailicon)
@@ -310,6 +329,7 @@ for s = 1, screen.count() do
     right_layout:add(batwidget)
     right_layout:add(arr3)
     right_layout:add(neticon)
+    --right_layout:add(strength)
     right_layout:add(netwidget)
     right_layout:add(arr2)
     right_layout:add(spr3f)
@@ -612,10 +632,9 @@ function run_once(cmd)
   awful.util.spawn_with_shell("pgrep -u $USER -x " .. findme .. " > /dev/null || (" .. cmd .. ")")
 end
 
--- ensures that the network applet on the menu shows up once.
---run_once("wicd-client -t")
---run_once("wicd-client -n")
-awful.util.spawn_with_shell("redshift -l 49.26:-123.23")
+-- ensures that these applications only run once
+run_once("redshift -l 49.26:-123.23")
+--awful.util.spawn_with_shell("redshift -l 49.26:-123.23")
 
 -- turns off caps lock keys and makes it function like an escape
 awful.util.spawn_with_shell("xmodmap /usr/bin/speedswapper")

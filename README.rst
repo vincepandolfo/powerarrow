@@ -4,7 +4,8 @@ Awesome Powerarrow theme for 3.5
 :Original Author: https://github.com/romockee/powerarrow
 
 This is my fork of Romockee's Powerarrow theme, implemented
-for Awesome-WM 3.5  This project is now in a stage where
+for Awesome-WM 3.5
+This project is now in a stage where
 80% of the widgets work and I am still working on fixing up
 the libraries.
 
@@ -30,7 +31,7 @@ What works in my version: so far
 
 - The layout in general (powerline)
 - Clock
-- Wireless icon and SSID name widget
+- Wireless icon and data sent/received indicator
 - Battery
 - Volume
 - CPU widget
@@ -44,10 +45,16 @@ Some differences:
 - Added on a clock widget and icon
 - Added a "netstat" drop down menu using the 'blingbling' library to indicate what processes are currently using the Internet
 - Volume icon instead of the core temperature.
+- Working wifi-signal strength indicator.  The bars now go
+  up or down, depending on your computers wifi signal strength, rather than a static icon that doesn't change (see screenshots for example)
 
 Screenshots:
 -------------
 
-.. image:: http://i.imgur.com/zWUKauq.jpg
-.. image:: http://i.imgur.com/YrxaVyl.jpg
+.. image:: http://i.imgur.com/oqBm8Qf.png
+wifi signal low
+.. image:: http://i.imgur.com/nb0dBOx.png
+wifi signal medium
 
+..image:: http://i.imgur.com/9WWpTXL.jpg
+The desktop so far

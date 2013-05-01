@@ -25,16 +25,16 @@ http://awesome.naquadah.org/wiki/Vicious#Getting_Vicious
 
 Add to the top of your runtime configuration file:
 
-``local cairo = require("lgi").cairo``
-``local blingbling = require("blingbling")``
-``vicious = require("vicious")``
+- ``local cairo = require("lgi").cairo``
+- ``local blingbling = require("blingbling")``
+- ``vicious = require("vicious")``
 
 
 **Beware, some of the hotkeys/key-bindings are from my rc.lua, so if something that you are used to pressing doesn't work, check my global keys**
 
 
-What works in my version: so far
-------------------------
+What works in my version so far
+-------------------------------
 
 - The layout in general (powerline)
 - Clock
@@ -44,6 +44,11 @@ What works in my version: so far
 - CPU widget
 - MEM widget
 - Mutt Mail widget
+
+
+(I am using wicd for my network client, if you are not using
+that, you should edit out the wicd field, otherwise you will
+get errors)
 
 Some differences:
 ----------------

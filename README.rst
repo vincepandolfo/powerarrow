@@ -20,8 +20,15 @@ https://github.com/cedlemo/blingbling
 Lua-oocairo:
 https://aur.archlinux.org/packages/lua-oocairo/
 
-udisks-glue-git:
-https://github.com/fernandotcl/udisks-glue
+Vicious:
+http://awesome.naquadah.org/wiki/Vicious#Getting_Vicious
+
+Add to the top of your runtime configuration file:
+
+``local cairo = require("lgi").cairo``
+``local blingbling = require("blingbling")``
+``vicious = require("vicious")``
+
 
 **Beware, some of the hotkeys/key-bindings are from my rc.lua, so if something that you are used to pressing doesn't work, check my global keys**
 
@@ -31,9 +38,9 @@ What works in my version: so far
 
 - The layout in general (powerline)
 - Clock
-- Wireless icon and data sent/received indicator
+- Wireless icon and data sent/received indicator (improved)
 - Battery
-- Volume
+- Volume (improved)
 - CPU widget
 - MEM widget
 - Mutt Mail widget
@@ -44,17 +51,33 @@ Some differences:
 - Took out the binary clock, due to the fact that it takes me way to long to read.
 - Added on a clock widget and icon
 - Added a "netstat" drop down menu using the 'blingbling' library to indicate what processes are currently using the Internet
+- "Sensors.lua" is not in the new Vicious library
 - Volume icon instead of the core temperature.
 - Working wifi-signal strength indicator.  The bars now go
   up or down, depending on your computers wifi signal strength, rather than a static icon that doesn't change (see screenshots for example)
+- Working volume level indicated in the form of a speaker.
+  The icon shows the sound level as a speaker (see
+  screenshots for example).
 
 Screenshots:
 -------------
+.. image:: http://i.imgur.com/80G9i0j.png
+- volume level high
+
+.. image:: http://i.imgur.com/KdD7vNX.png
+- volume level medium
+
+.. image:: http://i.imgur.com/oAiyiTi.png
+- volume level low
+
+.. image:: http://i.imgur.com/yaHOt3P.png
+- volume icon muted
 
 .. image:: http://i.imgur.com/oqBm8Qf.png
 - wifi signal low
+
 .. image:: http://i.imgur.com/nb0dBOx.png
 - wifi signal medium
 
-.. image:: http://i.imgur.com/9WWpTXL.jpg
+.. image:: http://i.imgur.com/wL3BHgL.jpg
 - The desktop so far

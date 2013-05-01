@@ -173,7 +173,6 @@ vicious.register(tdwidget, vicious.widgets.date, '<span font="UbuntuMono 12" col
 clockicon = wibox.widget.imagebox()
 clockicon:set_image(beautiful.widget_clock)
 
-
 ---{{---| Wifi Signal Widget |-------
 neticon = wibox.widget.imagebox()
 vicious.register(neticon, vicious.widgets.wifi, function(widget, args)
@@ -237,6 +236,23 @@ cpuicon:set_image(beautiful.widget_cpu)
 volume = wibox.widget.textbox()
 vicious.register(volume, vicious.widgets.volume,
 '<span background="#4B3B51" font="UbuntuMono 12"><span font="UbuntuMono 12" color="#EEEEEE"> Vol:$1$2 </span></span>', 0.3, "Master")
+
+volumeicon = wibox.widget.imagebox()
+vicious.register(volumeicon, vicious.widgets.volume, function(widget, args)
+    local paraone = tonumber(args[1])
+
+    if args[2] == "♩" or paraone == 0 then
+        volumeicon:set_image(beautiful.widget_volmute)
+    elseif paraone >= 67 and paraone <= 100 then
+        volumeicon:set_image(beautiful.widget_volhi)
+    elseif paraone >= 33 and paraone <= 66 then
+        volumeicon:set_image(beautiful.widget_volmed)
+    else
+        volumeicon:set_image(beautiful.widget_vollow)
+    end
+
+end, 0.3, "Master")
+
 
 --{{---| File Size widget |-----
 fswidget = wibox.widget.textbox()
@@ -320,6 +336,7 @@ for s = 1, screen.count() do
     right_layout:add(cpuicon)
     right_layout:add(cpuwidget)
     right_layout:add(arr6)
+    right_layout:add(volumeicon)
     right_layout:add(volume)
     right_layout:add(arr5)
     right_layout:add(fsicon)

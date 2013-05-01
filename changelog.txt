@@ -13,3 +13,10 @@ April 27th 2013
 - Working signal strength indicator, which is dependent on
 wifi signal. (please see screenshots)
 - Added up/down-load speed, and data received indicator
+
+May 1st 2013
+------------
+- Added a working speaker icon, which is dependent on volume
+level.  As the system's Master sound goes up, the speaker
+changes.  (please see screenshots)
+

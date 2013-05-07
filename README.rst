@@ -69,15 +69,17 @@ Some differences:
 How to set up mutt with gmail integration:
 -----------------------------------------
 
-Mutt setup:
+Mutt setup
+****
 <http://lifehacker.com/5574557/how-to-use-the-fast-and-powerful-mutt-email-client-with-gmail>
 
 Gmail integration:
+*****
 - In your home directory, created a file named .netrc
 - In this file you will put your login details, it should
-  look like this:
-..machine mail.google.com login youremail@gmail.com password
-yoursecretpassword..
+look like this:
+"machine mail.google.com login youremail@gmail.com password
+yoursecretpassword"  (without the quotations of course)
 
 Screenshots:
 -------------------------------

@@ -20,3 +20,8 @@ May 1st 2013
 level.  As the system's Master sound goes up, the speaker
 changes.  (please see screenshots)
 
+May 7th 2013
+------------
+- Added two mail icons that integrate with a the gmail.lua
+module in the vicious library.
+- Added an extra icon (mailopen.png) that indicates when you have new mail.

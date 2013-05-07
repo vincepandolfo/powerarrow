@@ -4,7 +4,6 @@ local awful = require("awful")
 local cairo = require("lgi").cairo
 awful.rules = require("awful.rules")
 require("awful.autofocus")
-require("volume")
 local blingbling = require("blingbling")
 vicious = require("vicious")
 local wibox = require("wibox")
@@ -157,10 +156,19 @@ mytasklist.buttons = awful.util.table.join(
 
 --{{--| Mail widget |---------
 mailicon = wibox.widget.imagebox()
-mailicon:set_image(beautiful.widget_mail)
+
+vicious.register(mailicon, vicious.widgets.gmail, function(widget, args)
+    local newMail = tonumber(args["{count}"])
+    if newMail > 0 then
+        mailicon:set_image(beautiful.widget_newmail)
+    else
+        mailicon:set_image(beautiful.widget_mailopen)
+    end
+end, 10)
+
+-- to make mutt pop up when pressed:
 mailicon:buttons(awful.util.table.join(awful.button({ }, 1,
 function () awful.util.spawn_with_shell(mailmutt) end)))
-
 --{{--| MEM widget |-----------------
 memwidget = wibox.widget.textbox()
 vicious.register(memwidget, vicious.widgets.mem, '<span background="#777E76" font="UbuntuMono 12"> <span font="UbuntuMono 12" color="#EEEEEE" background="#777E76">$2MB </span></span>', 13)
@@ -219,7 +227,7 @@ awful.button({ }, 1, function() awful.util.spawn_with_shell('wicd-client -n') en
 --{{---| CPU / sensors widget |-----------
 cpuwidget = wibox.widget.textbox()
 vicious.register(cpuwidget, vicious.widgets.cpu,
-'<span background="#4B696D" font="UbuntuMono 12"> <span font="UbuntuMono 12" color="#DDDDDD">$2%<span color="#888888">·</span>$3%</span></span>', 3)
+'<span background="#4B696D" font="UbuntuMono 12"> <span font="UbuntuMono 12" color="#DDDDDD">$2%<span color="#888888">·</span>$3% </span></span>', 3)
 cpuicon = wibox.widget.imagebox()
 cpuicon:set_image(beautiful.widget_cpu)
 --
@@ -231,11 +239,10 @@ cpuicon:set_image(beautiful.widget_cpu)
 --user_color = beautiful.notify_font_color_2,
 --root_color = beautiful.notify_font_color_3})
 
-
 ----{{--| Volume / volume icon |----------
 volume = wibox.widget.textbox()
 vicious.register(volume, vicious.widgets.volume,
-'<span background="#4B3B51" font="UbuntuMono 12"><span font="UbuntuMono 12" color="#EEEEEE"> Vol:$1$2 </span></span>', 0.3, "Master")
+'<span background="#4B3B51" font="UbuntuMono 12"><span font="UbuntuMono 12" color="#EEEEEE"> Vol:$1 </span></span>', 0.3, "Master")
 
 volumeicon = wibox.widget.imagebox()
 vicious.register(volumeicon, vicious.widgets.volume, function(widget, args)

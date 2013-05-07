@@ -43,7 +43,7 @@ What works in my version so far
 - Volume (improved)
 - CPU widget
 - MEM widget
-- Mutt Mail widget
+- Mutt Mail widget (improved)
 
 
 (I am using wicd for my network client, if you are not using
@@ -63,9 +63,31 @@ Some differences:
 - Working volume level indicated in the form of a speaker.
   The icon shows the sound level as a speaker (see
   screenshots for example).
+- Mail how has mutt and a notifier with gmail integration
+  (see screenshots for example).
+
+How to set up mutt with gmail integration:
+-----------------------------------------
+
+Mutt setup:
+<http://lifehacker.com/5574557/how-to-use-the-fast-and-powerful-mutt-email-client-with-gmail>
+
+Gmail integration:
+- In your home directory, created a file named .netrc
+- In this file you will put your login details, it should
+  look like this:
+..machine mail.google.com login youremail@gmail.com password
+yoursecretpassword..
 
 Screenshots:
--------------
+-------------------------------
+
+.. image:: http://i.imgur.com/yiLCxWr.png
+- you got mail!
+
+.. image:: http://i.imgur.com/B8gqVml.png
+- you have no mail.
+
 .. image:: http://i.imgur.com/80G9i0j.png
 - volume level high
 

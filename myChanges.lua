@@ -1,3 +1,5 @@
+--  Original Author:  Evan Ng, 2013
+--
 --  Some of the code in this file originally came from my rc.lua.  But because I
 --  like to keep things simple so my rc.lua doesn't look
 --  long and cluttered, I deleted a lot of my original comments.

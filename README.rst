@@ -13,6 +13,12 @@ the libraries.
 Notes
 -----
 
+At the moment, I did not include the enormous right-click
+menu that Romockee has.  Not because it is difficult to
+implement, but the fact that I don't have 99% of the
+software, books and applications he had.  If you need it, I
+will be more than happy to figure it out for you.
+
 You will need this updated library of "blingbling" for some
 of the Awesome-WM widgets:
 https://github.com/cedlemo/blingbling
@@ -80,6 +86,16 @@ Gmail integration:
 look like this:
 "machine mail.google.com login youremail@gmail.com password
 yoursecretpassword"  (without the quotations of course)
+
+Future Direction:
+-------------------------------
+
+- Looking to implement a calendar by turning the date
+  textbox into a button
+- Will implement a battery widget that actually corresponds
+  to the amount of battery you have left. (I am huge
+  fan/advocate of icons that are dynamic, can change and
+  ones that reflect on current status)
 
 Screenshots:
 -------------------------------

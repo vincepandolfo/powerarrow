@@ -3,6 +3,9 @@ Awesome Powerarrow theme for 3.5
 
 :Original Author: https://github.com/romockee/powerarrow
 
+!!  Currently working on the Powerarrow Dark, screen shot is
+at the bottom.  Hopefully it will be done soon!!
+
 This is my fork of Romockee's Powerarrow theme, implemented
 for Awesome-WM 3.5
 This project is now in a stage where
@@ -126,3 +129,8 @@ Screenshots:
 
 .. image:: http://i.imgur.com/wL3BHgL.jpg
 - The desktop so far
+
+.. image:: http://i.imgur.com/0yKkSdH.jpg
+- The powerarrow-dark I'm currently working on bringing
+  over.  As you can see the colours are kinda off and I am
+  missing the icon set.

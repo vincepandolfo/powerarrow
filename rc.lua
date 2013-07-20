@@ -40,17 +40,15 @@ end
 config_dir = ("/home/ep/.config/awesome/")
 themes_dir = (config_dir .. "/themes")
 beautiful.init(themes_dir .. "/powerarrow/theme.lua")
-awesome.font = "TerminusMedium 12"
 
 --{{---| Variables |------------------------
 --terminal = "urxvt -geometry 79x22+0-0"
-terminal = "urxvt"
+terminal = "termite"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
-browser = "firefox"
+browser = "chromium"
 modkey = "Mod4"
-mailmutt = "urxvt -T 'Mutt' -g 90x25-20+34 -e mutt"
-cal = "urxvt -T 'Cal' -e cal"
+
 -- Table of layouts to cover with awful.layout.inc, order matters.
 local layouts =
 {
@@ -164,20 +162,32 @@ vicious.register(mailicon, vicious.widgets.gmail, function(widget, args)
     else
         mailicon:set_image(beautiful.widget_mailopen)
     end
-end, 10)
+end, 15)
 
--- to make mutt pop up when pressed:
+-- to make GMail pop up when pressed:
 mailicon:buttons(awful.util.table.join(awful.button({ }, 1,
-function () awful.util.spawn_with_shell(mailmutt) end)))
+function () awful.util.spawn_with_shell("chromium gmail.com") end)))
+
+
 --{{--| MEM widget |-----------------
 memwidget = wibox.widget.textbox()
-vicious.register(memwidget, vicious.widgets.mem, '<span background="#777E76" font="UbuntuMono 12"> <span font="UbuntuMono 12" color="#EEEEEE" background="#777E76">$2MB </span></span>', 13)
+
+--this is for the normal powerarrow
+--vicious.register(memwidget, vicious.widgets.mem, '<span background="#777E76" font="monof55 12"> <span font="monof55 12" color="#EEEEEE" background="#777E76">$2MB </span></span>', 20)
+
+--this is for the powerarrow-dark
+vicious.register(memwidget, vicious.widgets.mem, '<span background="#1f2428" font="monof55 10"> <span font="monof55 10" color="#EEEEEE" background="#1f2428">$2MB </span></span>', 10)
+memicon = wibox.widget.imagebox()
 memicon = wibox.widget.imagebox()
 memicon:set_image(beautiful.widget_mem)
 
 --{{--| Time and Date widget |-------
 tdwidget = wibox.widget.textbox()
-vicious.register(tdwidget, vicious.widgets.date, '<span font="UbuntuMono 12" color="#EEEEEE" background="#777E76"> %b %d %I:%M</span>', 20)
+--this one is for the normal powerarrow
+--vicious.register(tdwidget, vicious.widgets.date, '<span font="monof55 12" color="#EEEEEE" background="#777E76"> %b %d %I:%M</span>', 20)
+
+--this one is for the powerarrow-dark
+vicious.register(tdwidget, vicious.widgets.date, '<span font="monof55 10" color="#EEEEEE" background="#1f2428"> %b %d %I:%M</span>', 20)
 clockicon = wibox.widget.imagebox()
 clockicon:set_image(beautiful.widget_clock)
 
@@ -192,11 +202,24 @@ vicious.register(neticon, vicious.widgets.wifi, function(widget, args)
     else
         neticon:set_image(beautiful.widget_netlow)
     end
-end, 110, 'wlp2s0')
+end, 120, 'wlp2s0')
 
 ----{{---| Net widget | ----------------
 netwidget = wibox.widget.textbox()
 
+-- this one is for the normal powerarrow
+--vicious.register(netwidget, vicious.widgets.net, function(widget, args)
+--    local interface = ""
+--    if args["{wlp2s0 carrier}"] == 1 then
+--        interface = "wlp2s0"
+--    elseif args["{enp0s25 carrier}"] == 1 then
+--        interface = "enp0s25"
+--    else
+--        return ""
+--    end
+--    return '<span background="#C2C2A4" font="monof55 12"> <span font ="monof55 12" color="#FFFFFF">'..args["{"..interface.." down_kb}"]..'kbps'..'</span></span>' end, 10)
+
+-- this one is for the powerarrow-dark
 vicious.register(netwidget, vicious.widgets.net, function(widget, args)
     local interface = ""
     if args["{wlp2s0 carrier}"] == 1 then
@@ -206,7 +229,7 @@ vicious.register(netwidget, vicious.widgets.net, function(widget, args)
     else
         return ""
     end
-    return '<span background="#C2C2A4" font="UbuntuMono 12"> <span font ="UbuntuMono 12" color="#FFFFFF">'..args["{"..interface.." down_kb}"]..'kbps|'..args["{"..interface.." rx_mb}"].."Mb "..'</span></span>' end, 11)
+    return '<span background="#313131" font="monof55 10"> <span font ="monof55 10" color="#FFFFFF">'..args["{"..interface.." down_kb}"]..'kbps'..'</span></span>' end, 10)
 netwidget:buttons(awful.util.table.join(
 awful.button({ }, 1, function() awful.util.spawn_with_shell('wicd-client -n') end)))
 
@@ -226,8 +249,14 @@ awful.button({ }, 1, function() awful.util.spawn_with_shell('wicd-client -n') en
 
 --{{---| CPU / sensors widget |-----------
 cpuwidget = wibox.widget.textbox()
+--this one is for the normal powerarrow
+
+--vicious.register(cpuwidget, vicious.widgets.cpu,
+--'<span background="#4B696D" font="monof55 12"> <span font="monof55 12" color="#DDDDDD">$2%<span color="#888888">·</span>$3% </span></span>', 5)
+
+--this one is the powerarrow dark
 vicious.register(cpuwidget, vicious.widgets.cpu,
-'<span background="#4B696D" font="UbuntuMono 12"> <span font="UbuntuMono 12" color="#DDDDDD">$2%<span color="#888888">·</span>$3% </span></span>', 3)
+'<span background="#313131" font="monof55 10"> <span font="monof55 10" color="#DDDDDD">$2%<span color="#888888"> </span>$3% $4% $5% </span></span>', 5)
 cpuicon = wibox.widget.imagebox()
 cpuicon:set_image(beautiful.widget_cpu)
 --
@@ -241,21 +270,26 @@ cpuicon:set_image(beautiful.widget_cpu)
 
 ----{{--| Volume / volume icon |----------
 volume = wibox.widget.textbox()
+--this one is for the normal powerarrow
+--vicious.register(volume, vicious.widgets.volume,
+--'<span background="#4B3B51" font="monof55 12"><span font="monof55 12" color="#EEEEEE"> Vol:$1 </span></span>', 0.3, "Master")
+
+--this one is for the powerarrow-dark
 vicious.register(volume, vicious.widgets.volume,
-'<span background="#4B3B51" font="UbuntuMono 12"><span font="UbuntuMono 12" color="#EEEEEE"> Vol:$1 </span></span>', 0.3, "Master")
+'<span background="#1f2428" font="monof55 10"><span font="monof55 10" color="#EEEEEE"> Vol:$1 </span></span>', 0.3, "Master")
 
 volumeicon = wibox.widget.imagebox()
 vicious.register(volumeicon, vicious.widgets.volume, function(widget, args)
     local paraone = tonumber(args[1])
 
     if args[2] == "♩" or paraone == 0 then
-        volumeicon:set_image(beautiful.widget_volmute)
+        volumeicon:set_image(beautiful.widget_redmute)
     elseif paraone >= 67 and paraone <= 100 then
-        volumeicon:set_image(beautiful.widget_volhi)
+        volumeicon:set_image(beautiful.widget_music)
     elseif paraone >= 33 and paraone <= 66 then
-        volumeicon:set_image(beautiful.widget_volmed)
+        volumeicon:set_image(beautiful.widget_music)
     else
-        volumeicon:set_image(beautiful.widget_vollow)
+        volumeicon:set_image(beautiful.widget_music)
     end
 
 end, 0.3, "Master")
@@ -263,8 +297,14 @@ end, 0.3, "Master")
 
 --{{---| File Size widget |-----
 fswidget = wibox.widget.textbox()
+
+--this one is for normal powerarrow
+--vicious.register(fswidget, vicious.widgets.fs,
+--'<span background="#D0785D" font="monof55 12"> <span font="monof55 12" color="#EEEEEE">${/home used_p}/${/home avail_p} GB </span></span>', 800)
+
+--this one is for the powerarrow-dark
 vicious.register(fswidget, vicious.widgets.fs,
-'<span background="#D0785D" font="UbuntuMono 12"> <span font="UbuntuMono 12" color="#EEEEEE">${/home used_p}/${/home avail_p} GB </span></span>', 8)
+'<span background="#313131" font="monof55 10"> <span font="monof55 10" color="#EEEEEE">${/home used_p}/${/home avail_p} GB </span></span>', 800)
 fsicon = wibox.widget.imagebox()
 fsicon:set_image(beautiful.widget_hdd)
 
@@ -272,15 +312,19 @@ fsicon:set_image(beautiful.widget_hdd)
 baticon = wibox.widget.imagebox()
 baticon:set_image(beautiful.widget_battery)
 batwidget = wibox.widget.textbox()
-vicious.register( batwidget, vicious.widgets.bat, '<span background="#92B0A0" font="UbuntuMono 12"><span font="UbuntuMono 12" color="#FFFFFF" background="#92B0A0">$1$2% </span></span>', 1, "BAT0" )
+--vicious.register( batwidget, vicious.widgets.bat, '<span background="#92B0A0" font="monof55 12"><span font="monof55 12" color="#FFFFFF" background="#92B0A0">$1$2% </span></span>', 30, "BAT0" )
+
+vicious.register( batwidget, vicious.widgets.bat, '<span background="#1f2428" font="monof55 10"><span font="monof55 10" color="#FFFFFF" background="#1f2428">$1$2% </span></span>', 30, "BAT0" )
 
 --{{---| Separators widgets |-------------
 spr = wibox.widget.textbox()
 spr:set_text(' ')
 sprd = wibox.widget.textbox()
-sprd:set_markup('<span background ="#313131" font="UbuntuMono 12"> </span>')
+sprd:set_markup('<span background ="#313131" font="monof55 12"> </span>')
 spr3f = wibox.widget.textbox()
-spr3f:set_markup('<span background="#777e76" font="UbuntuMono 12"> </span>')
+spr3f:set_markup('<span background="#777e76" font="monof55 12"> </span>')
+sprdots = wibox.widget.textbox()
+sprdots:set_text('⁝')
 arr1 = wibox.widget.imagebox()
 arr1:set_image("/home/ep/.config/awesome/themes/powerarrow/icons/powerarrow/arr1.png")
 arr2 = wibox.widget.imagebox()
@@ -301,6 +345,15 @@ arr9 = wibox.widget.imagebox()
 arr9:set_image(beautiful.arr9)
 arr0 = wibox.widget.imagebox()
 arr0:set_image(beautiful.arr0)
+
+--{{--| The "Powerarrow-Dark theme separators begin here |-------
+
+arrl = wibox.widget.imagebox()
+arrl:set_image(beautiful.arrl)
+arrl_dl = wibox.widget.imagebox()
+arrl_dl:set_image(beautiful.arrl_dl)
+arrl_ld = wibox.widget.imagebox()
+arrl_ld:set_image(beautiful.arrl_ld)
 ---------------------------------------
 
 for s = 1, screen.count() do
@@ -332,37 +385,64 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
-    -- Powerarrow
-    right_layout:add(spr)
-    right_layout:add(arr9)
-    right_layout:add(mailicon)
-    right_layout:add(arr8)
-    right_layout:add(memicon)
-    right_layout:add(memwidget)
-    right_layout:add(arr7)
-    right_layout:add(cpuicon)
-    right_layout:add(cpuwidget)
-    right_layout:add(arr6)
-    right_layout:add(volumeicon)
-    right_layout:add(volume)
-    right_layout:add(arr5)
-    right_layout:add(fsicon)
-    right_layout:add(fswidget)
-    right_layout:add(arr4)
-    right_layout:add(baticon)
-    right_layout:add(batwidget)
-    right_layout:add(arr3)
-    right_layout:add(neticon)
-    --right_layout:add(strength)
-    right_layout:add(netwidget)
-    right_layout:add(arr2)
-    right_layout:add(spr3f)
-    right_layout:add(clockicon)
-    right_layout:add(tdwidget)
-    right_layout:add(spr3f)
-    right_layout:add(arr1)
-    right_layout:add(mylayoutbox[s])
 
+--{{ Powerarrow ----------------------------
+--    right_layout:add(spr)
+--    right_layout:add(arr9)
+--    right_layout:add(mailicon)
+--    right_layout:add(arr8)
+--    right_layout:add(memicon)
+--    right_layout:add(memwidget)
+--    right_layout:add(arr7)
+--    right_layout:add(cpuicon)
+--    right_layout:add(cpuwidget)
+--    right_layout:add(arr6)
+--    right_layout:add(volumeicon)
+--    right_layout:add(volume)
+--    right_layout:add(arr5)
+--    right_layout:add(fsicon)
+--    right_layout:add(fswidget)
+--    right_layout:add(arr4)
+--    right_layout:add(baticon)
+--    right_layout:add(batwidget)
+--    right_layout:add(arr3)
+--    right_layout:add(neticon)
+--    --right_layout:add(strength)
+--    right_layout:add(netwidget)
+--    right_layout:add(arr2)
+--    right_layout:add(spr3f)
+--    right_layout:add(clockicon)
+--    right_layout:add(tdwidget)
+--    right_layout:add(spr3f)
+--    right_layout:add(arr1)
+--    right_layout:add(mylayoutbox[s])
+-----------------------------------------------
+
+--{{ Powerarrow-Dark------------------------------
+        right_layout:add(arrl_ld)
+        right_layout:add(mailicon)
+        right_layout:add(arrl_dl)
+        right_layout:add(memwidget)
+        right_layout:add(arrl_ld)
+        right_layout:add(cpuwidget)
+        right_layout:add(arrl_dl)
+        right_layout:add(volumeicon)
+        right_layout:add(volume)
+        right_layout:add(arrl_ld)
+        right_layout:add(fswidget)
+        right_layout:add(arrl_dl)
+        --right_layout:add(baticon)
+        right_layout:add(batwidget)
+        right_layout:add(arrl_ld)
+        --right_layout:add(neticon)
+        right_layout:add(netwidget)
+        right_layout:add(arrl_dl)
+        --right_layout:add(clockicon)
+        right_layout:add(tdwidget)
+        right_layout:add(spr)
+        right_layout:add(arrl_ld)
+        right_layout:add(mylayoutbox[s])
+---------------------------------------------------
     -- Now bring it all together (with the tasklist in the middle)
     local layout = wibox.layout.align.horizontal()
     layout:set_left(left_layout)
@@ -425,14 +505,11 @@ globalkeys = awful.util.table.join(
 
     -- System summons:
 
-    -- Opens Firefox
-    awful.key( { "Control", "Shift"}, "f", function() awful.util.spawn(browser) end),
+    -- Opens Chromium
+    awful.key( { "Control", "Shift"}, "c", function() awful.util.spawn(browser) end),
 
     -- Shutdowns Computer
     awful.key({ "Control",          }, "Escape", function() awful.util.spawn("systemctl poweroff") end),
-
-    -- Spawns sublime text 2
-    awful.key( { "Control", "Shift"}, "b", function() awful.util.spawn("subl") end),
 
     -- Spawns skype
     awful.key( { "Control", "Shift"}, "s", function() awful.util.spawn("skype") end),
@@ -658,10 +735,9 @@ end
 
 -- ensures that these applications only run once
 run_once("redshift -l 49.26:-123.23")
---awful.util.spawn_with_shell("redshift -l 49.26:-123.23")
 
 -- turns off caps lock keys and makes it function like an escape
-awful.util.spawn_with_shell("xmodmap /usr/bin/speedswapper")
+awful.util.spawn_with_shell("xmodmap ~/.speedswapper")
 
 -- turns off terminal bell, holy fuck it's annoying.
 awful.util.spawn_with_shell("/usr/bin/xset b off")

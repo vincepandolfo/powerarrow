@@ -130,7 +130,7 @@ Screenshots:
 .. image:: http://i.imgur.com/wL3BHgL.jpg
 - The desktop so far
 
-.. image:: http://i.imgur.com/0yKkSdH.jpg
+.. image:: http://i.imgur.com/0WI9q1W.jpg
 - The powerarrow-dark I'm currently working on bringing
-  over.  As you can see the colours are kinda off and I am
+  over.  As you can see I am
   missing the icon set.

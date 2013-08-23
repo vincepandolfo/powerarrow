@@ -42,9 +42,9 @@ Add to the top of your runtime configuration file:
 - ``local blingbling = require("blingbling")``
 - ``local vicious = require("vicious")``
 
--``git clone https://github.com/esn89/powerarrow.git``
--``cd powerarrow/``
--``cp -R awesome ~/.config/``
+- ``git clone https://github.com/esn89/powerarrow.git``
+- ``cd powerarrow/``
+- ``cp -R awesome ~/.config/``
 
 - Todo:
 - In the themes.lua, please change the $USER to yourself.

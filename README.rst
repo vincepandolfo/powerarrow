@@ -16,15 +16,18 @@ the libraries.
 Notes
 -----
 
-At the moment, I did not include the enormous right-click
+I did not include the enormous right-click
 menu that Romockee has.  Not because it is difficult to
-implement, but the fact that I don't have 99% of the
+implement, but the fact that I don't have/need 99% of the
 software, books and applications he had.  If you need it, I
 will be more than happy to figure it out for you.
 
-You will need this updated library of "blingbling" for some
-of the Awesome-WM widgets:
-https://github.com/cedlemo/blingbling
+In addition, I am trying to make this version of PowerArrow
+as light as possible in terms of code and the desktop
+itself.
+
+Installation
+------------
 
 Lua-oocairo:
 https://aur.archlinux.org/packages/lua-oocairo/
@@ -32,12 +35,23 @@ https://aur.archlinux.org/packages/lua-oocairo/
 Vicious:
 http://awesome.naquadah.org/wiki/Vicious#Getting_Vicious
 
+If you are running Arch, I highly recommend you grab all that from
+the repository.
+
 Add to the top of your runtime configuration file:
 
 - ``local cairo = require("lgi").cairo``
 - ``local blingbling = require("blingbling")``
-- ``vicious = require("vicious")``
+- ``local vicious = require("vicious")``
 
+``git clone https://github.com/esn89/powerarrow.git``
+``cd powerarrow/``
+``cp -R awesome ~/.config/``
+
+- Todo:
+In the themes.lua, please change the $USER to yourself.
+In the rc.lua, change the browser to the one you are using.
+In the rc.lua at line 147, 149 change the wireless and ethernet interfaces to your own.  (You can find out what the name is by running ```iwconfig``` in your terminal
 
 **Beware, some of the hotkeys/key-bindings are from my rc.lua, so if something that you are used to pressing doesn't work, check my global keys**
 
@@ -52,7 +66,7 @@ What works in my version so far
 - Volume (improved)
 - CPU widget
 - MEM widget
-- Mutt Mail widget (improved)
+- GMail widget (improved)
 
 
 (I am using wicd for my network client, if you are not using
@@ -72,15 +86,11 @@ Some differences:
 - Working volume level indicated in the form of a speaker.
   The icon shows the sound level as a speaker (see
   screenshots for example).
-- Mail how has mutt and a notifier with gmail integration
+- Mail how has a notifier with gmail integration
   (see screenshots for example).
 
-How to set up mutt with gmail integration:
+How to set up  gmail integration:
 -----------------------------------------
-
-Mutt setup
-****
-<http://lifehacker.com/5574557/how-to-use-the-fast-and-powerful-mutt-email-client-with-gmail>
 
 Gmail integration:
 *****
@@ -99,6 +109,7 @@ Future Direction:
   to the amount of battery you have left. (I am huge
   fan/advocate of icons that are dynamic, can change and
   ones that reflect on current status)
+- Powerarrow dark!
 
 Screenshots:
 -------------------------------
@@ -127,10 +138,9 @@ Screenshots:
 .. image:: http://i.imgur.com/nb0dBOx.png
 - wifi signal medium
 
-.. image:: http://i.imgur.com/wL3BHgL.jpg
+.. image:: http://i.imgur.com/q1o4PRU.png
 - The desktop so far
 
 .. image:: http://i.imgur.com/0WI9q1W.jpg
 - The powerarrow-dark I'm currently working on bringing
-  over.  As you can see I am
-  missing the icon set.
+  over.  As you can see I am  missing the icon set.

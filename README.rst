@@ -9,9 +9,7 @@ at the bottom.  Hopefully it will be done soon!!**
 This is my fork of Romockee's Powerarrow theme, implemented
 for Awesome-WM 3.5
 This project is now in a stage where
-80% of the widgets work and I am still working on fixing up
-the libraries.
-
+90% of the widgets work
 
 Notes
 -----
@@ -44,14 +42,14 @@ Add to the top of your runtime configuration file:
 - ``local blingbling = require("blingbling")``
 - ``local vicious = require("vicious")``
 
-``git clone https://github.com/esn89/powerarrow.git``
-``cd powerarrow/``
-``cp -R awesome ~/.config/``
+-``git clone https://github.com/esn89/powerarrow.git``
+-``cd powerarrow/``
+-``cp -R awesome ~/.config/``
 
 - Todo:
-In the themes.lua, please change the $USER to yourself.
-In the rc.lua, change the browser to the one you are using.
-In the rc.lua at line 147, 149 change the wireless and ethernet interfaces to your own.  (You can find out what the name is by running ```iwconfig``` in your terminal
+-In the themes.lua, please change the $USER to yourself.
+-In the rc.lua, change the browser to the one you are using.
+-In the rc.lua at line 147, 149 change the wireless and ethernet interfaces to your own.  (You can find out what the name is by running ```iwconfig``` in your terminal
 
 **Beware, some of the hotkeys/key-bindings are from my rc.lua, so if something that you are used to pressing doesn't work, check my global keys**
 

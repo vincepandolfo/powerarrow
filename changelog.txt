@@ -29,3 +29,14 @@ module in the vicious library.
 May 8th 2013
 ------------
 - Included snippets of my original rc.lua
+
+August 22th 2013
+------------
+- Cleaned up the rc.lua and theme.lua completely.
+- Reorganized the structure of the code
+- Removed ~200 lines of code
+- Removed unused libraries.
+- Removed unused icons leaving ONLY the icons that are used.
+- Removed mutt integration.
+- Added easy-to-configure path to user's icons
+

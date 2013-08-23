@@ -47,9 +47,9 @@ Add to the top of your runtime configuration file:
 -``cp -R awesome ~/.config/``
 
 - Todo:
--In the themes.lua, please change the $USER to yourself.
--In the rc.lua, change the browser to the one you are using.
--In the rc.lua at line 147, 149 change the wireless and ethernet interfaces to your own.  (You can find out what the name is by running ```iwconfig``` in your terminal
+- In the themes.lua, please change the $USER to yourself.
+- In the rc.lua, change the browser to the one you are using.
+- In the rc.lua at line 147, 149 change the wireless and ethernet interfaces to your own.  (You can find out what the name is by running ```iwconfig``` in your terminal
 
 **Beware, some of the hotkeys/key-bindings are from my rc.lua, so if something that you are used to pressing doesn't work, check my global keys**
 

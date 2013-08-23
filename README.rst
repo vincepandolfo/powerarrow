@@ -134,7 +134,3 @@ Screenshots:
 
 .. image:: http://i.imgur.com/q1o4PRU.png
 - The desktop so far
-
-.. image:: http://i.imgur.com/0WI9q1W.jpg
-- The powerarrow-dark I'm currently working on bringing
-  over.  As you can see I am  missing the icon set.

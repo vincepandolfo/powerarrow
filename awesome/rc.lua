@@ -136,7 +136,7 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 
 --{{-- Time and Date Widget }} --
 tdwidget = wibox.widget.textbox()
-local strf = '<span font=' .. font .. ' color="#EEEEEE" background="#777E76">%b %d %I:%M</span>'
+local strf = '<span font="' .. font .. '" color="#EEEEEE" background="#777E76">%b %d %I:%M</span>'
 vicious.register(tdwidget, vicious.widgets.date, strf, 20)
 
 clockicon = wibox.widget.imagebox()

@@ -136,7 +136,8 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 
 --{{-- Time and Date Widget }} --
 tdwidget = wibox.widget.textbox()
-vicious.register(tdwidget, vicious.widgets.date, '<span font='font' color="#EEEEEE" background="#777E76"> %b %d %I:%M</span>', 20)
+local strf = '<span font=' .. font .. ' color="#EEEEEE" background="#777E76">%b %d %I:%M</span>'
+vicious.register(tdwidget, vicious.widgets.date, strf, 20)
 
 clockicon = wibox.widget.imagebox()
 clockicon:set_image(beautiful.clock)
@@ -194,7 +195,7 @@ volumeicon = wibox.widget.imagebox()
 vicious.register(volumeicon, vicious.widgets.volume, function(widget, args)
     local paraone = tonumber(args[1])
 
-    if args[2] == "♩" or paraone == 0 then
+    if args[2] == "?" or paraone == 0 then
         volumeicon:set_image(beautiful.mute)
     elseif paraone >= 67 and paraone <= 100 then
         volumeicon:set_image(beautiful.volhi)

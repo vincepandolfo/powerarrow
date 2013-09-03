@@ -195,7 +195,7 @@ volumeicon = wibox.widget.imagebox()
 vicious.register(volumeicon, vicious.widgets.volume, function(widget, args)
     local paraone = tonumber(args[1])
 
-    if args[2] == "?" or paraone == 0 then
+    if args[2] == "♩" or paraone == 0 then
         volumeicon:set_image(beautiful.mute)
     elseif paraone >= 67 and paraone <= 100 then
         volumeicon:set_image(beautiful.volhi)

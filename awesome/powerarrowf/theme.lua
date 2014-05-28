@@ -4,8 +4,8 @@
 
 theme = {}
 
--- Todo:  Change the $USER to yourself.
-pathToConfig = "/home/ep/.config/awesome/"
+-- Setup Paths 
+pathToConfig = os.getenv("HOME") .. "/.config/awesome/"
 
 theme.font          = "sans 8"
 
@@ -15,9 +15,7 @@ theme.bg_urgent     = "#3F3F3F"
 theme.bg_systray    = theme.bg_normal
 
 theme.fg_normal     = "#AAAAAA"
-theme.fg_focus      = "#0099CC"
 theme.fg_urgent     = "#3F3F3F"
-
 theme.border_width  = 1
 theme.border_normal = "#000000"
 theme.border_focus  = "#535d6c"
@@ -73,63 +71,48 @@ theme.titlebar_maximized_button_focus_inactive  = "/usr/share/awesome/themes/def
 theme.titlebar_maximized_button_normal_active = "/usr/share/awesome/themes/default/titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_active  = "/usr/share/awesome/themes/default/titlebar/maximized_focus_active.png"
 
-theme.wallpaper = pathToConfig .. "powerarrowf/candy_bean_wallpaper.jpg"
+theme.wallpaper = pathToConfig .. "powerarrowf/darkwood.png"
 
 -- You can use your own layout icons like this:
 theme.layout_floating  = pathToConfig .. "powerarrowf/layouts/floating.png"
-theme.layout_tilebottom = pathToConfig .. "/powerarrowf/layouts/tilebottom.png"
+theme.layout_tilebottom = pathToConfig  .. "powerarrowf/layouts/tilebottom.png"
 theme.layout_tileleft   = pathToConfig .. "powerarrowf/layouts/tileleft.png"
 theme.layout_tile = pathToConfig .. "powerarrowf/layouts/tile.png"
 theme.layout_tiletop = pathToConfig .. "powerarrowf/layouts/tiletop.png"
 
-
-
 --{{ For the Dark Theme }} --
 
-theme.arr1 = pathToConfig .. "powerarrowf/icons/arr1.png"
-theme.arr2 = pathToConfig .. "powerarrowf/icons/arr2.png"
-theme.arr3 = pathToConfig .. "powerarrowf/icons/arr3.png"
-theme.arr4 = pathToConfig .. "powerarrowf/icons/arr4.png"
-theme.arr5 = pathToConfig .. "powerarrowf/icons/arr5.png"
-theme.arr6 = pathToConfig .. "powerarrowf/icons/arr6.png"
-theme.arr7 = pathToConfig .. "powerarrowf/icons/arr7.png"
-theme.arr8 = pathToConfig .. "powerarrowf/icons/arr8.png"
-theme.arr9 = pathToConfig .. "powerarrowf/icons/arr9.png"
+theme.arrl = pathToConfig .. "powerarrowf/icons/arrl.png"
+theme.arrl_ld = pathToConfig .. "powerarrowf/icons/arrl_ld.png"
+theme.arrl_dl = pathToConfig .. "powerarrowf/icons/arrl_dl.png"
 
--- The clock icon:
+--{{ For the time and date clock icon }} --
 theme.clock = pathToConfig .. "powerarrowf/icons/myclocknew.png"
 
---{{ For the wifi widget icons }} --
-theme.nethigh = pathToConfig .. "powerarrowf/icons/nethigh.png"
-theme.netmedium = pathToConfig .. "powerarrowf/icons/netmedium.png"
+--{{ For the wifi icon }} --
 theme.netlow = pathToConfig .. "powerarrowf/icons/netlow.png"
+theme.netmed = pathToConfig .. "powerarrowf/icons/netmedium.png"
+theme.nethigh = pathToConfig .. "powerarrowf/icons/nethigh.png"
 
---{{ For the battery icon }} --
-theme.baticon = pathToConfig .. "powerarrowf/icons/battery.png"
+--{{ For the charging (AC adaptor) icon }} --
+theme.ac = pathToConfig .. "powerarrowf/icons/ac.png"
 
 --{{ For the hard drive icon }} --
-theme.fsicon = pathToConfig .. "powerarrowf/icons/hdd.png"
+theme.hdd = pathToConfig .. "powerarrowf/icons/hdd.png"
 
 --{{ For the volume icons }} --
 theme.mute = pathToConfig .. "powerarrowf/icons/mute.png"
 theme.music = pathToConfig .. "powerarrowf/icons/music.png"
 
---{{ For the volume icon }} --
-theme.mute = pathToConfig .. "powerarrowf/icons/volmute.png"
-theme.volhi = pathToConfig .. "powerarrowf/icons/volhi.png"
-theme.volmed = pathToConfig .. "powerarrowf/icons/volmed.png"
-theme.vollow = pathToConfig .. "powerarrowf/icons/vollow.png"
-
 --{{ For the CPU icon }} --
-theme.cpuicon = pathToConfig .. "powerarrowf/icons/cpu.png"
+theme.cpu = pathToConfig .. "powerarrowf/icons/cpu.png"
 
---{{ For the memory icon }} --
+--{{ For the Memory icon }} --
 theme.mem = pathToConfig .. "powerarrowf/icons/mem.png"
 
---{{ For the memory icon }} --
+--{{ For the mail icons }} --
 theme.mail = pathToConfig .. "powerarrowf/icons/mail.png"
 theme.mailopen = pathToConfig .. "powerarrowf/icons/mailopen.png"
-
 
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.

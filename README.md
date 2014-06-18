@@ -4,7 +4,7 @@ PowerArrow theme for Awesome 3.5
 This is a fork of [Romockee's PowerArrow theme][romockee], implemented for
 [Awesome-WM][awesome] 3.5 by [esn89][esn89].
 
-**See also the [dark branch](../../tree/dark) for an alternate dark color scheme!**
+**See also the [master branch](../../tree/master) for the original light color scheme!**
 
 Notes
 -----
@@ -47,7 +47,7 @@ What works so far
 
 * The layout in general (ala powerline)
 * Clock
-* Wireless icon and data sent/received indicator (improved)  
+* Wireless icon and data sent/received indicator (improved)
 
   Uses wicd as the network client, if you are not using that, you should
   edit out the wicd field, otherwise you will get errors.
@@ -94,6 +94,7 @@ Future Direction
 Screenshots
 -----------
 
+<<<<<<< HEAD
 ![light theme screenshot](http://i.imgur.com/q1o4PRU.png)
 
 ![you got mail!](http://i.imgur.com/yiLCxWr.png)
@@ -112,6 +113,9 @@ Screenshots
 
 ![wifi signal medium](http://i.imgur.com/nb0dBOx.png)
 
+=======
+![dark theme screenshot](http://i.imgur.com/zm23mz9.png)
+>>>>>>> alerque/dark
 
   [awesome]: http://awesome.naquadah.org
   [esn89]: https://github.com/esn89/powerarrow

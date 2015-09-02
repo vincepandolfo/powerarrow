@@ -19,7 +19,7 @@ Widgets
 -------
 
 - Time and date
-- Brightness
+- Brightness (uses xbacklight)
 - Battery (with time left)
 - Google Drive (click to mount/unmount, relies on google-drive-ocamlfuse)
 - Volume

@@ -21,7 +21,7 @@ Widgets
 - Time and date
 - Brightness
 - Battery (with time left)
-- Home folder disk usage
+- Google Drive (click to mount/unmount, relies on google-drive-ocamlfuse)
 - Volume
 - CPU usage
 - Memory usage

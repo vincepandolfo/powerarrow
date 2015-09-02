@@ -42,8 +42,10 @@ end
 
 --{{---| Theme | -------------------------------------
 
--- Todo:  Please change the "ep" to your $USER
-config_dir = ("/home/vincenzo/.config/awesome/")
+-- Change user with your $USER
+user = "vincenzo"
+
+config_dir = ("/home/" .. user .. "/.config/awesome/")
 themes_dir = (config_dir .. "/powerarrowf")
 
 beautiful.init(themes_dir .. "/theme.lua")
@@ -160,15 +162,32 @@ batwidget = wibox.widget.textbox()
 vicious.register( batwidget, vicious.widgets.bat, '<span background="#92B0A0" font="' .. font .. '"><span font="' .. font .. '" color="#FFFFFF" background="#92B0A0">$3 left $1$2% </span></span>', 30, "BAT0" )
 
 
---{{---| File Size widget |-----
+--{{ File Size widget }}--
 fswidget = wibox.widget.textbox()
 
-vicious.register(fswidget, vicious.widgets.fs,
-'<span background="#D0785D" font="' .. font .. '"> <span font="' .. font .. '" color="#EEEEEE">${/home used_gb}/${/home avail_gb} GB </span></span>', 
-800)
+vicious.register(fswidget, vicious.widgets.fs, function(widget, args)
+    string = "Not mounted"
+    if args["{/home/" .. user .. "/Drive avail_gb}"] ~= nil then
+        string = string.format("%.1f/%.1f GB", args["{/home/" .. user .. "/Drive used_gb}"], args["{/home/" .. user .. "/Drive avail_gb}"])
+    end
+    return '<span background="#D0785D" font="' .. font .. '" color="#EEEEEE"> ' .. string .. ' </span>' 
+end, 800)
 
 fsicon = wibox.widget.imagebox()
 fsicon:set_image(beautiful.fsicon)
+
+--{{ Toggle Google Drive mount/unmount }}--
+fswidget:buttons(awful.util.table.join(awful.button({ }, 1,
+function ()  
+    -- uses pread to wait for the execution of the command - yes, it's a little hack
+    if awful.util.pread("grep Drive /etc/mtab") == '' then
+        temp = awful.util.pread("google-drive-ocamlfuse /home/" .. user .. "/Drive")
+    else
+        temp = awful.util.pread("fusermount -u /home/" .. user .. "/Drive")
+    end
+
+    vicious.force({ fswidget, })
+end)))
 
 ----{{--| Volume / volume icon |----------
 volume = wibox.widget.textbox()
